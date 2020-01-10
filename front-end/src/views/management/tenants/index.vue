@@ -103,6 +103,9 @@
           </el-table-column>
         </el-table>
       </el-col>
+      <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 24}" :xl="{span: 24}">
+        <Pagination v-show="!listLoading && total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getTenants" />
+      </el-col>
     </el-row>
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" width="30%">
@@ -155,12 +158,16 @@ import { fetchClusters } from '@/api/clusters'
 import { validateEmpty } from '@/utils/validate'
 import { formatBytes } from '@/utils/index'
 import { numberFormatter } from '@/filters/index'
+import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 const defaultForm = {
   cluster: ''
 }
 export default {
   name: 'Tenants',
+  components: {
+    Pagination
+  },
   data() {
     return {
       postForm: Object.assign({}, defaultForm),

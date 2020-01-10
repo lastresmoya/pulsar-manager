@@ -1065,6 +1065,7 @@ export default {
           }
           this.topicsListLoading = false
           this.topicsList.push(topicInfo)
+          this.topicsList.sort((a, b) => a.topic.localeCompare(b.topic))
         }
       })
     },
